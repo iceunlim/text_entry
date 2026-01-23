@@ -1,0 +1,33 @@
+[package]
+name = "text_entry"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+enigo = "0.6.1"
+
+[profile.release]
+panic = "abort"
+lto = true
+codegen-units = 1
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.i686-unknown-linux-gnu]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.i686-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-static"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-static"]
+
+[target.aarch64-unknown-linux-gnu]
+rustflags = ["-C", "target-feature=+crt-static"]

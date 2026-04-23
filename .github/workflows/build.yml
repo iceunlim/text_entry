@@ -10,21 +10,23 @@ on:
 jobs:
   build-windows:
     name: Build Win7 x86_32
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install cross
-        run: cargo install cross
+      - name: Setup Rust 1.77.2 (Win7 compatible)
+        uses: dtolnay/rust-toolchain@1.77.2
+        with:
+          targets: i686-pc-windows-msvc
 
-      - name: Build with cross
-        run: cross build --release --target i686-pc-windows-gnu
+      - name: Build for Win7 x86 (MSVC)
+        run: cargo build --release --target i686-pc-windows-msvc
 
       - name: Create publish directory
-        run: mkdir -p target/publish
+        run: New-Item -ItemType Directory -Path target/publish -Force
 
       - name: Copy binary to publish directory
-        run: cp target/i686-pc-windows-gnu/release/text_entry.exe target/publish/text_entry-win7-x86.exe
+        run: Copy-Item target/i686-pc-windows-msvc/release/text_entry.exe target/publish/text_entry-win7-x86.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

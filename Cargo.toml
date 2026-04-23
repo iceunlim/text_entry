@@ -10,24 +10,3 @@ enigo = "0.5.0"
 panic = "abort"
 lto = true
 codegen-units = 1
-
-[target.x86_64-unknown-linux-gnu]
-rustflags = ["-C", "target-feature=+crt-static"]
-
-[target.i686-unknown-linux-gnu]
-rustflags = ["-C", "target-feature=+crt-static"]
-
-[target.x86_64-pc-windows-msvc]
-rustflags = ["-C", "target-feature=+crt-static"]
-
-[target.i686-pc-windows-msvc]
-rustflags = ["-C", "target-feature=+crt-static"]
-
-[target.x86_64-apple-darwin]
-rustflags = ["-C", "link-arg=-static"]
-
-[target.aarch64-apple-darwin]
-rustflags = ["-C", "link-arg=-static"]
-
-[target.aarch64-unknown-linux-gnu]
-rustflags = ["-C", "target-feature=+crt-static"]
